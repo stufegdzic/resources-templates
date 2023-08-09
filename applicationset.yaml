@@ -1,0 +1,40 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: customers-applicationset
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        # git repository to get the variables from
+        repoURL: https://github.com/stufegdzic/gitops-customers.git
+        # branch used to get the variables from
+        revision: main
+        files:
+          # path to the directory that includes directories to read as variables
+          - path: customer-*/config-customer.yaml
+  template:
+    metadata:
+      # basename is the name of the directory not the full path
+      name: '{{ customer }}'
+    spec:
+      project: default
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+      source:
+        # source repo, in this example both repositories are the same
+        repoURL: https://github.com/stufegdzic/gitops-templates.git
+        targetRevision: main
+        # path to read manifests from, here it's the full path not only the name of the directory
+        path: customer-template
+        helm:
+          valueFiles:
+            - "values.yaml"
+          values: |-
+            {{values}}
+      destination:
+        server: https://kubernetes.default.svc
+        # different namespaces named after the directories names to be used as destinations
+        namespace: '{{ namespace }}'

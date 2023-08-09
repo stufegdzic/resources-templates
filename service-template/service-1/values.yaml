@@ -1,0 +1,5 @@
+domain: kubernetes.docker.internal
+replicaCount: 1
+echoservice:
+  image: ealen/echo-server:latest
+  imagePullPolicy: IfNotPresent

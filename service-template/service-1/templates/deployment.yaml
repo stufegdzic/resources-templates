@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-1-{{ .Release.Namespace }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: service-1
+      customer: {{ .Release.Namespace }}
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: service-1
+        customer: {{ .Release.Namespace }}
+    spec:
+      containers:
+        - image: {{ .Values.echoservice.image }}
+          imagePullPolicy: {{ .Values.echoservice.imagePullPolicy }}
+          name: service-1
+          ports:
+            - containerPort: 80
+          env:
+            - name: PORT
+              value: "80"

@@ -1,0 +1,6 @@
+apiVersion: v2
+name: service-2-chart
+description: Service 2 chart
+type: application
+version: 0.1.0
+appVersion: 1.16.0

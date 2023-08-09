@@ -1,0 +1,3 @@
+domain: kubernetes.docker.internal
+replicaCount: 1
+message: Greetings from service-2
