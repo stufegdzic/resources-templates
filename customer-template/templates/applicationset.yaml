@@ -7,7 +7,7 @@ spec:
   generators:
     - git:
         # git repository to get the variables from
-        repoURL: https://github.com/stufegdzic/gitops-customers.git
+        repoURL: https://github.com/stufegdzic/customers.git
         # branch used to get the variables from
         revision: main
         files:
@@ -25,7 +25,7 @@ spec:
           selfHeal: true
       source:
         # source repo, in this example both repositories are the same
-        repoURL: https://github.com/stufegdzic/gitops-templates.git
+        repoURL: https://github.com/stufegdzic/resources-templates.git
         targetRevision: main
         # path to read manifests from, here it's the full path not only the name of the directory
         path: service-template/{{ print "{{type}}" }}
