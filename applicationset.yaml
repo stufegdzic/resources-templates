@@ -9,7 +9,7 @@ spec:
         # git repository to get the variables from
         repoURL: https://github.com/stufegdzic/customers.git
         # branch used to get the variables from
-        revision: main
+        revision: demo
         files:
           # path to the directory that includes directories to read as variables
           - path: customer-*/config-customer.yaml
@@ -26,7 +26,7 @@ spec:
       source:
         # source repo, in this example both repositories are the same
         repoURL: https://github.com/stufegdzic/resources-templates.git
-        targetRevision: main
+        targetRevision: demo
         # path to read manifests from, here it's the full path not only the name of the directory
         path: customer-template
         helm:
